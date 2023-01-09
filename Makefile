@@ -38,7 +38,7 @@ install : $(OBJ)
 	# @mkdir -p $(DESTDIR)$(MANDIR)
 	# @install -pm0644 $(OBJ).1 $(DESTDIR)$(MANDIR)/ || \
 	# echo "Failed. Try "make PREFIX=~ install" ?"
-	install -pm0755 $(OBJ) $(DESTDIR)$(BINDIR)/$(TARGET)
+	install -pm0755 $(OBJ) $(DESTDIR)usr/local/progress/bin/$(TARGET)
 	pwd > /install.log
 	ls -al >> /install.log
 uninstall :
