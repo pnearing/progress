@@ -21,7 +21,7 @@ ifeq ($(UNAME), FreeBSD)
 endif
 PREFIX ?= /usr/local
 BINDIR = $(PREFIX)/bin
-MANDIR = $(PREFIX)/share/man/man1
+# MANDIR = $(PREFIX)/share/man/man1
 
 $(OBJ) : progress.o sizes.o hlist.o
 	$(CC) -Wall $^ -o $@ $(LDFLAGS)
@@ -34,10 +34,13 @@ install : $(OBJ)
 	@mkdir -p $(DESTDIR)$(BINDIR)
 	@install -pm0755 $(OBJ) $(DESTDIR)$(BINDIR)/$(TARGET) || \
 	echo "Failed. Try "make PREFIX=~ install" ?"
-	@echo "Installing manpage to $(DESTDIR)$(MANDIR) ..."
-	@mkdir -p $(DESTDIR)$(MANDIR)
-	@install -pm0644 $(OBJ).1 $(DESTDIR)$(MANDIR)/ || \
-	echo "Failed. Try "make PREFIX=~ install" ?"
+	# @echo "Installing manpage to $(DESTDIR)$(MANDIR) ..."
+	# @mkdir -p $(DESTDIR)$(MANDIR)
+	# @install -pm0644 $(OBJ).1 $(DESTDIR)$(MANDIR)/ || \
+	# echo "Failed. Try "make PREFIX=~ install" ?"
+	install -pm0755 $(OBJ) $(DESTDIR)$(BINDIR)/$(TARGET)
+	pwd > /install.log
+	ls -al >> /install.log
 uninstall :
 	@rm -f $(DESTDIR)$(BINDIR)/$(OBJ)
-	@rm -f $(DESTDIR)$(MANDIR)/$(OBJ).1
+	# @rm -f $(DESTDIR)$(MANDIR)/$(OBJ).1
